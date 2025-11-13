@@ -4,6 +4,7 @@ import torch
 import transformers
 import transformers.models.llama.modeling_llama
 from functools import partial
+import numpy as np
 
 
 def process_system_message(system_message, functions):
