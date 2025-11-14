@@ -91,6 +91,19 @@ class ToolLLaMA:
         print("end_print" + "*" * 50)
 
     def parse(self, functions, process_id, **args):
+
+        #似乎需要贴入这块
+         
+        # 1) 通用映射（防未知/大小写）
+        base_roles = {
+            "system": "system",
+            "user": "user",
+            "assistant": "assistant",
+            "tool": "tool",
+            "function": "tool",
+        }
+        
+        
         conv = get_conversation_template(self.template)
         if self.template == "tool-llama":
             roles = {"human": conv.roles[0], "gpt": conv.roles[1]}
@@ -101,12 +114,19 @@ class ToolLLaMA:
                 "function": conv.roles[2],
                 "assistant": conv.roles[3],
             }
+        else:
+            # 未知模板就退回通用
+            roles = base_roles
 
         self.time = time.time()
         conversation_history = self.conversation_history
         prompt = ""
         for message in conversation_history:
-            role = roles[message["role"]]
+            # 3) 安全取 role（大小写兼容、缺省回退 user）
+            role_key = str(message.get("role", "user")).lower()
+            role = roles.get(role_key, roles.get("user", "user"))
+
+            #role = roles[message["role"]]
             content = message["content"]
             if role == "System" and functions != []:
                 content = process_system_message(content, functions)
