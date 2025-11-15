@@ -12,7 +12,9 @@ export TOOL_DIR="/home/t653z659/StableToolBench/toolenv/toolenv2404_filtered" #�
 export TOOLBENCH_KEY="EMPTY"
 
 export GPT_MODEL="gpt-3.5-turbo-16k"
-export SERVICE_URL="http://localhost:8080/virtual"
+#export SERVICE_URL="http://localhost:8080/virtual"
+export SERVICE_URL="http://127.0.0.1:12001/virtual" #更新成了我的服务地址
+
 
 export BACKBONE_MODEL="$1"
 export METHOD="$2"
