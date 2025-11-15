@@ -1,5 +1,6 @@
 # Please fill the OPENAI_KEY and OPENAI_API_BASE when your backbone_model is based on ChatGPT
-export OPENAI_KEY=""
+#export OPENAI_KEY=""
+export OPENAI_KEY="EMPTY"
 export OPENAI_API_BASE=""
 
 # The tool directory downloaded from ToolBench
